@@ -1,0 +1,113 @@
+﻿@model TropicalServerApp.Models.Order
+
+@{
+    Layout = null;
+    if (Session["userObj"] == null)
+    {
+        Response.Redirect("~/Login/Login");
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Detail</title>
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <th>Key</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>Order ID</td>
+                <td>@Model.OrderID</td>
+            </tr>
+            <tr>
+                <td>Order Tracking Number</td>
+                <td>@Model.OrderTrackingNumber</td>
+            </tr>
+            <tr>
+                <td>Order Route Number</td>
+                <td>@Model.OrderRouteNumber</td>
+            </tr>
+            <tr>
+                <td>Order Customer Number</td>
+                <td>@Model.OrderCustomerNumber</td>
+            </tr>
+            <tr>
+                <td>Customer Name</td>
+                <td>@Model.CustomerName</td>
+            </tr>
+            <tr>
+                <td>Customer Address</td>
+                <td>@Model.CustomerAddress</td>
+            </tr>
+            <tr>
+                <td>Order Group Number</td>
+                <td>@Model.OrderGroupNumber</td>
+            </tr>
+            <tr>
+                <td>Order Case umbers</td>
+                <td>@Model.OrderCaseNumbers</td>
+            </tr>
+            <tr>
+                <td>Order Item Number</td>
+                <td>@Model.OrderItemNumber</td>
+            <tr>
+            <tr>
+                <td>Order Promo Number</td>
+                <td>@Model.OrderPromoNumber</td>
+            <tr>
+            <tr>
+                <td>Order Item Qty</td>
+                <td>@Model.OrderItemQty</td>
+            <tr>
+            <tr>
+                <td>ItemUnit Price</td>
+                <td>@Model.ItemUnitPrice</td>
+            <tr>
+            <tr>
+                <td>ItemTotal Price</td>
+                <td>@Model.ItemTotalPrice</td>
+            <tr>
+            <tr>
+                <td>Order Date</td>
+                <td>@Model.OrderDate</td>
+            <tr>
+            <tr>
+                <td>Delivery Date</td>
+                <td>@Model.DeliveryDate</td>
+            <tr>
+            <tr>
+                <td>User ID</td>
+                <td>@Model.UserID</td>
+            <tr>
+            <tr>
+                <td>Tablet ID</td>
+                <td>@Model.TabletID</td>
+            <tr>
+            <tr>
+                <td>Data Sync DateTime</td>
+                <td>@Model.DataSyncDateTime</td>
+            <tr>
+            <tr>
+                <td>Order Confirm Flag</td>
+                <td>@Model.OrderConfirmFlag</td>
+            <tr>
+            <tr>
+                <td>Item Type</td>
+                <td>@Model.ItemType</td>
+            <tr>
+            <tr>
+                <td>Per Pound Items Weight</td>
+                <td>@Model.PerPoundItemsWeight</td>
+            <tr>
+
+        </table>
+    </div>
+</body>
+</html>

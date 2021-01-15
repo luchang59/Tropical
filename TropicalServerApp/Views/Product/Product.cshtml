@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "Product";
+    if (Session["userObj"] == null)
+    {
+        Response.Redirect("~/Login/Login");
+    }
+}
+
+<h2>Product</h2>
+

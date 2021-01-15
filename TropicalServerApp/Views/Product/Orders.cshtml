@@ -1,0 +1,221 @@
+﻿@model TropicalServerApp.ViewModel.OrderViewModel
+@using TropicalServerApp.Models;
+
+@{
+    ViewBag.Title = "Orders";
+    if(Session["userObj"] == null)
+    {
+        Response.Redirect("~/Login/Login");
+    }
+}
+
+<h2>Orders</h2>
+<div>
+    <div id="CriteriaBar">
+        <form>
+            <div class="Criteria">
+                <label class="label" for="orderDate">Order Date:</label>
+                <select class="Input" id="orderDate" name="orderDate">
+                    <option value="-1">All</option>
+                    <option value="02/20/2012">Today</option>
+                    <option value="02/13/2012">Last 7 Days</option>
+                    <option value="01/20/2012">Last 1 Month</option>
+                    <option value="08/20/2011">Last 6 Month</option>
+                </select>
+            </div>
+            <div class="Criteria">
+                <label class="label" for="customerIdText">Customer ID:</label>
+                <input class="Input" type="text" id="customerIdText" name="customerIdText" />
+            </div>
+            <div class="Criteria">
+                <label class="label" for="customerNameText">Customer Name:</label>
+                <input class="Input" type="text" id="customerNameText" name="customerNameText"/>
+            </div>
+            <div class="Criteria">
+                <label class="label">Sales Manager:</label>
+                <select class="Input">
+                </select>
+            </div>
+        </form>
+    </div>
+
+    <div id="grid">
+        <table class="gvOrders">
+            <tr>
+                <th>Tracking #</th>
+                <th>Order Date</th>
+                <th>Customer ID</th>
+                <th>Customer Name</th>
+                <th>Address</th>
+                <th>Route #</th>
+                <th>Available Actions</th>
+            </tr>
+
+            @for (int i = 0; i < Model.orders.Count; i++)
+            {
+                Order o = Model.orders[i];
+                if (i % 2 == 0)
+                {
+                    <tr class="Row">
+                        <td>@o.OrderTrackingNumber</td>
+                        <td>@o.OrderDate</td>
+                        <td>@o.OrderCustomerNumber</td>
+                        <td>@o.CustomerName</td>
+                        <td>@o.CustomerAddress</td>
+                        <td>@o.OrderRouteNumber</td>
+                        <td>
+                            @Html.ActionLink("Detail", "Detail", "Product",
+                            new {
+                                OrderID = o.OrderID,
+                                OrderTrackingNumber = o.OrderTrackingNumber,
+                                OrderDate = o.OrderDate,
+                                OrderCustomerNumber = o.OrderCustomerNumber,
+                                CustomerName = o.CustomerName,
+                                CustomerAddress = o.CustomerAddress,
+                                OrderRouteNumber = o.OrderRouteNumber,
+                                OrderGroupNumber = o.OrderGroupNumber,
+                                OrderCaseNumbers = o.OrderCaseNumbers,
+                                OrderItemNumber = o.OrderItemNumber,
+                                OrderPromoNumber = o.OrderPromoNumber,
+                                OrderItemQty = o.OrderItemQty,
+                                ItemUnitPrice = o.ItemUnitPrice,
+                                ItemTotalPrice = o.ItemTotalPrice,
+                                DeliveryDate = o.DeliveryDate,
+                                UserID = o.UserID,
+                                TabletID = o.TabletID,
+                                DataSyncDateTime = o.DataSyncDateTime,
+                                OrderConfirmFlag = o.OrderConfirmFlag,
+                                ItemType = o.ItemType,
+                                PerPoundItemsWeight = o.PerPoundItemsWeight,
+                            }, new { target = "_blank" })
+                            <a>Edit</a> <a>Delete</a>
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    <tr class="AltRow">
+                        <td>@o.OrderTrackingNumber</td>
+                        <td>@o.OrderDate</td>
+                        <td>@o.OrderCustomerNumber</td>
+                        <td>@o.CustomerName</td>
+                        <td>@o.CustomerAddress</td>
+                        <td>@o.OrderRouteNumber</td>
+                        <td>
+                            @Html.ActionLink("Detail", "Detail", "Product",
+                                                new
+                                 {
+                                                    OrderID = o.OrderID,
+                                                    OrderTrackingNumber = o.OrderTrackingNumber,
+                                                    OrderDate = o.OrderDate,
+                                                    OrderCustomerNumber = o.OrderCustomerNumber,
+                                                    CustomerName = o.CustomerName,
+                                                    CustomerAddress = o.CustomerAddress,
+                                                    OrderRouteNumber = o.OrderRouteNumber,
+                                                    OrderGroupNumber = o.OrderGroupNumber,
+                                                    OrderCaseNumbers = o.OrderCaseNumbers,
+                                                    OrderItemNumber = o.OrderItemNumber,
+                                                    OrderPromoNumber = o.OrderPromoNumber,
+                                                    OrderItemQty = o.OrderItemQty,
+                                                    ItemUnitPrice = o.ItemUnitPrice,
+                                                    ItemTotalPrice = o.ItemTotalPrice,
+                                                    DeliveryDate = o.DeliveryDate,
+                                                    UserID = o.UserID,
+                                                    TabletID = o.TabletID,
+                                                    DataSyncDateTime = o.DataSyncDateTime,
+                                                    OrderConfirmFlag = o.OrderConfirmFlag,
+                                                    ItemType = o.ItemType,
+                                                    PerPoundItemsWeight = o.PerPoundItemsWeight,
+                                                }, new { target = "_blank" })
+                            <a>Edit</a> <a>Delete</a>
+                         </td>
+                    </tr>
+                }
+            }
+
+        </table>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <script>
+        $(document).ready(function () {
+            $("#orderDate").change(function () {
+                var selectDate = $(this).val();
+                var today = "02/20/2012";
+
+                if (selectDate == -1) {
+                    $("table tr").each(function () {
+                        $(this).show();
+                    })
+                } else {
+                    var diffDay = dayDifference(today, selectDate);
+                    $("table tr").each(function (res) {
+                        if (res !== 0) {
+                            var date = $(this).find("td:nth-child(2)").text();
+                            if (dayDifference(today, date) <= diffDay) {
+                                $(this).show();
+                            } else {
+                                $(this).hide();
+                            }
+                        }
+                    });
+                }
+                function dayDifference(day1, day2) {
+                    var day1 = new Date(day1);
+                    var day2 = new Date(day2);
+                    var diff = Math.ceil((day1 - day2) / (1000 * 60 * 60 * 24));
+                    return diff;
+                }
+            });
+
+            $("#customerIdText").change(function () {
+                var customerId = $(this).val();
+                if (customerId.length < 3) {
+                    $("table tr").each(function () {
+                        $(this).show();
+                    })
+                } else {
+                    $("table tr").each(function (res) {
+                        if (res !== 0) {
+                            var targetId = $(this).find("td:nth-child(3)").text();
+                            var len = customerId.length;
+                            console.log(targetId.substring(0, len));
+                            if (targetId.substring(0, len) == customerId) {
+                                
+                                $(this).show();
+                            } else {
+                                $(this).hide();
+                            }
+                        }
+                    });
+                }
+            });
+
+            $("#customerNameText").change(function () {
+                var customerId = $(this).val();
+                if (customerId.length < 3) {
+                    $("table tr").each(function () {
+                        $(this).show();
+                    })
+                } else {
+                    $("table tr").each(function (res) {
+                        if (res !== 0) {
+                            var targetId = $(this).find("td:nth-child(4)").text();
+                            var len = customerId.length;
+                            console.log(targetId.substring(0, len));
+                            if (targetId.substring(0, len) == customerId) {
+
+                                $(this).show();
+                            } else {
+                                $(this).hide();
+                            }
+                        }
+                    });
+                }
+            });
+        });
+        
+    </script>
+</div>

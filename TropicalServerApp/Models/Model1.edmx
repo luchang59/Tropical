@@ -1,0 +1,1092 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="myTestDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblAnswers">
+          <Key>
+            <PropertyRef Name="AnswerID" />
+          </Key>
+          <Property Name="AnswerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuestionID" Type="int" />
+          <Property Name="CustomerID" Type="int" />
+          <Property Name="Answer" Type="varchar" MaxLength="250" />
+          <Property Name="SurveyDate" Type="date" />
+          <Property Name="ItemNumber" Type="int" />
+        </EntityType>
+        <EntityType Name="tblCity">
+          <Key>
+            <PropertyRef Name="City_ID" />
+          </Key>
+          <Property Name="City_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="City_Abbr" Type="varchar" MaxLength="50" />
+          <Property Name="City_Description" Type="varchar" MaxLength="200" />
+          <Property Name="State_ID" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'myTestDB.dbo.tblCollection' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tblCollection">
+          <Key>
+            <PropertyRef Name="CollectionID" />
+          </Key>
+          <Property Name="CollectionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CollectionDate" Type="datetime" />
+          <Property Name="CollectionAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CollectionCheckNumber" Type="varchar" MaxLength="50" />
+          <Property Name="CollectionCashYesNo" Type="char" MaxLength="1" />
+          <Property Name="CollectionForCustomerNumber" Type="int" />
+          <Property Name="OrderConfirmFlag" Type="int" />
+        </EntityType>
+        <EntityType Name="tblCustomer">
+          <Key>
+            <PropertyRef Name="CustID" />
+          </Key>
+          <Property Name="CustID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustNumber" Type="int" />
+          <Property Name="CustName" Type="varchar" MaxLength="100" />
+          <Property Name="CustOfficeAddress1" Type="varchar" MaxLength="100" />
+          <Property Name="CustOfficeAddress2" Type="varchar" MaxLength="100" />
+          <Property Name="CustOfficeCity" Type="varchar" MaxLength="50" />
+          <Property Name="CustOfficeState" Type="varchar" MaxLength="2" />
+          <Property Name="CustOfficeZip" Type="int" />
+          <Property Name="CustPhoneNumber" Type="varchar" MaxLength="50" />
+          <Property Name="CustFaxNumber" Type="varchar" MaxLength="50" />
+          <Property Name="CustRouteNumber" Type="int" />
+          <Property Name="CustSalesRepNumber" Type="int" />
+          <Property Name="CustOrderEntryContactName" Type="varchar" MaxLength="100" />
+          <Property Name="CustPromoGroup" Type="int" />
+          <Property Name="CustPriceGroup" Type="int" />
+          <Property Name="CustPaymentTermsCode" Type="int" />
+          <Property Name="CustPaymentType" Type="int" />
+          <Property Name="CustBillingAddress1" Type="varchar" MaxLength="100" />
+          <Property Name="CustBillingAddress2" Type="varchar" MaxLength="100" />
+          <Property Name="CustBillingCity" Type="varchar" MaxLength="100" />
+          <Property Name="CustBillingState" Type="varchar" MaxLength="2" />
+          <Property Name="CustBillingZip" Type="int" />
+          <Property Name="CustRouteVisitWeekDay" Type="varchar" MaxLength="10" />
+          <Property Name="CustSequence" Type="int" />
+        </EntityType>
+        <EntityType Name="tblCustPaymentTerm">
+          <Key>
+            <PropertyRef Name="CustPaymentTermID" />
+          </Key>
+          <Property Name="CustPaymentTermID" Type="int" Nullable="false" />
+          <Property Name="CustPaymentTermCode" Type="int" />
+          <Property Name="CustPaymentTermDescription" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'myTestDB.dbo.tblCustPaymentType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tblCustPaymentType">
+          <Key>
+            <PropertyRef Name="CustPaymentTypeID" />
+          </Key>
+          <Property Name="CustPaymentTypeID" Type="int" Nullable="false" />
+          <Property Name="CustPaymentTypeNumber" Type="int" />
+          <Property Name="CustPaymentTypeDescription" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblCustRoute">
+          <Key>
+            <PropertyRef Name="CustRouteNumberID" />
+          </Key>
+          <Property Name="CustRouteNumberID" Type="int" Nullable="false" />
+          <Property Name="CustRouteNumber" Type="int" />
+          <Property Name="CustRouteNumberDescription" Type="varchar" MaxLength="100" />
+          <Property Name="CustRouteUserAssignID" Type="int" />
+          <Property Name="CustRouteAssignFrom" Type="datetime" />
+          <Property Name="CustRouteAssignTo" Type="datetime" />
+          <Property Name="CustRouteRep" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblInvoiceHistory">
+          <Key>
+            <PropertyRef Name="InvoiceID" />
+          </Key>
+          <Property Name="InvoiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InvoiceNumber" Type="int" />
+          <Property Name="InvoiceDate" Type="datetime" />
+          <Property Name="InvoiceStatus" Type="varchar" MaxLength="50" />
+          <Property Name="InvoiceForCustomerNumber" Type="int" />
+          <Property Name="InvoiceAmount" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="tblItem">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemNumber" Type="int" />
+          <Property Name="ItemShortDescription" Type="varchar" MaxLength="50" />
+          <Property Name="ItemDescription" Type="varchar" MaxLength="100" />
+          <Property Name="ItemUPC" Type="varchar" MaxLength="50" />
+          <Property Name="ItemShelfLife" Type="int" />
+          <Property Name="ItemReturnAllowedFlag" Type="varchar" MaxLength="1" />
+          <Property Name="ItemType" Type="int" />
+          <Property Name="ItemUnits" Type="int" />
+          <Property Name="ItemWeights" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ItemPriceGroup" Type="int" />
+          <Property Name="ItemProductGroup" Type="int" />
+          <Property Name="ItemPromoGroup" Type="int" />
+          <Property Name="PrePrice" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="tblItemPromoGroup">
+          <Key>
+            <PropertyRef Name="ItemPromoGroupID" />
+          </Key>
+          <Property Name="ItemPromoGroupID" Type="int" Nullable="false" />
+          <Property Name="ItemPromoGroupNumber" Type="int" />
+          <Property Name="ItemPromoGroupDescription" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="tblItemType">
+          <Key>
+            <PropertyRef Name="ItemTypeID" />
+          </Key>
+          <Property Name="ItemTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemTypeNumber" Type="int" />
+          <Property Name="ItemTypeDescription" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'myTestDB.dbo.tblMesssage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tblMesssage">
+          <Key>
+            <PropertyRef Name="MessageID" />
+          </Key>
+          <Property Name="MessageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MessageDescription" Type="varchar" MaxLength="100" />
+          <Property Name="MessageAssignRouteNumber" Type="int" />
+          <Property Name="MessageAllFlag" Type="char" MaxLength="1" />
+          <Property Name="MessageAssignUserID" Type="int" />
+          <Property Name="MessageDateAndTime" Type="datetime" />
+          <Property Name="MessageCreatedByUser" Type="int" />
+        </EntityType>
+        <EntityType Name="tblOrder">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderTrackingNumber" Type="varchar" MaxLength="50" />
+          <Property Name="OrderRouteNumber" Type="int" />
+          <Property Name="OrderCustomerNumber" Type="int" />
+          <Property Name="OrderGroupNumber" Type="varchar" MaxLength="50" />
+          <Property Name="OrderCaseNumbers" Type="int" />
+          <Property Name="OrderItemNumber" Type="int" />
+          <Property Name="OrderPromoNumber" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="OrderItemQty" Type="int" />
+          <Property Name="ItemUnitPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ItemTotalPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="OrderDate" Type="datetime" />
+          <Property Name="DeliveryDate" Type="datetime" />
+          <Property Name="UserID" Type="varchar" MaxLength="50" />
+          <Property Name="TabletID" Type="varchar" MaxLength="50" />
+          <Property Name="DataSyncDateTime" Type="datetime" />
+          <Property Name="OrderConfirmFlag" Type="int" />
+          <Property Name="ItemType" Type="int" />
+          <Property Name="PerPoundItemsWeight" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="tblOrderHistory">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderCustomerNumber" Type="int" Nullable="false" />
+          <Property Name="OrderItemNumber" Type="int" />
+          <Property Name="OrderDate1" Type="datetime" />
+          <Property Name="OrderItemQty1" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="OrderDate2" Type="datetime" />
+          <Property Name="OrderItemQty2" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="OrderDate3" Type="datetime" />
+          <Property Name="OrderItemQty3" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="OrderDate4" Type="datetime" />
+          <Property Name="OrderItemQty4" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="OrderDate5" Type="datetime" />
+          <Property Name="OrderItemQty5" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="OrderDate6" Type="datetime" />
+          <Property Name="OrderItemQty6" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'myTestDB.dbo.tblPriceGroup' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tblPriceGroup">
+          <Key>
+            <PropertyRef Name="PriceGroupID" />
+          </Key>
+          <Property Name="PriceGroupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PriceGroupNumber" Type="int" />
+          <Property Name="ItemNumber" Type="int" />
+          <Property Name="RouteNumber" Type="int" />
+          <Property Name="BeginDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="EffectivePrice" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="tblProductGroup">
+          <Key>
+            <PropertyRef Name="ItemProductGroupID" />
+          </Key>
+          <Property Name="ItemProductGroupID" Type="int" Nullable="false" />
+          <Property Name="ItemProductGroupNumber" Type="int" />
+          <Property Name="ItemProductGroupDescription" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="tblQuestionMaster">
+          <Key>
+            <PropertyRef Name="QuestionID" />
+          </Key>
+          <Property Name="QuestionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuestionDesc" Type="varchar" MaxLength="150" />
+          <Property Name="QuestionTypeID" Type="int" />
+          <Property Name="QuesType" Type="varchar" MaxLength="20" />
+          <Property Name="ValidationType" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="tblQuestionType">
+          <Key>
+            <PropertyRef Name="QuestionTypeID" />
+          </Key>
+          <Property Name="QuestionTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuestionTypeDesc" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblReturn">
+          <Key>
+            <PropertyRef Name="ReturnID" />
+          </Key>
+          <Property Name="ReturnID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReturnGroupNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ReturnCaseNumbers" Type="int" />
+          <Property Name="ReturnItemNumber" Type="int" />
+          <Property Name="ReturnPromoNumber" Type="int" />
+          <Property Name="ReturnItemWeight" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ReturnItemUnits" Type="int" />
+          <Property Name="ItemUnitPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CustomerNumber" Type="int" />
+          <Property Name="ItemTotalPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ReturnDate" Type="datetime" />
+          <Property Name="UserID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TabletID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DataSyncDateTime" Type="datetime" />
+          <Property Name="OrderConfirmFlag" Type="int" />
+          <Property Name="ItemType" Type="int" />
+        </EntityType>
+        <EntityType Name="tblReturnTypes">
+          <Key>
+            <PropertyRef Name="ReturnTypeID" />
+          </Key>
+          <Property Name="ReturnTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReturnTypeCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ReturnTypeDescription" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="tblState">
+          <Key>
+            <PropertyRef Name="State_ID" />
+          </Key>
+          <Property Name="State_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="State_Abbr" Type="varchar" MaxLength="50" />
+          <Property Name="State_Description" Type="varchar" MaxLength="100" />
+          <Property Name="Country_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="tblTropicalUser">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LoginID" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="RoleID" Type="int" />
+          <Property Name="UserRouteNumber" Type="int" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="tblTropicalUserRole">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleDescription" Type="varchar" MaxLength="100" />
+          <Property Name="RoleCreatedBy" Type="int" />
+          <Property Name="RoleCreatedDate" Type="datetime" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'myTestDB.dbo.tblUserLogin' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tblUserLogin">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="EmailID" />
+          </Key>
+          <Property Name="UserID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmailID" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="myTestDBModelStoreContainer">
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblAnswers" EntityType="Self.tblAnswers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCity" EntityType="Self.tblCity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCustomer" EntityType="Self.tblCustomer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCustPaymentTerm" EntityType="Self.tblCustPaymentTerm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCustRoute" EntityType="Self.tblCustRoute" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblInvoiceHistory" EntityType="Self.tblInvoiceHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblItem" EntityType="Self.tblItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblItemPromoGroup" EntityType="Self.tblItemPromoGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblItemType" EntityType="Self.tblItemType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblOrder" EntityType="Self.tblOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblOrderHistory" EntityType="Self.tblOrderHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProductGroup" EntityType="Self.tblProductGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblQuestionMaster" EntityType="Self.tblQuestionMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblQuestionType" EntityType="Self.tblQuestionType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblReturn" EntityType="Self.tblReturn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblReturnTypes" EntityType="Self.tblReturnTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblState" EntityType="Self.tblState" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTropicalUser" EntityType="Self.tblTropicalUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTropicalUserRole" EntityType="Self.tblTropicalUserRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCollection" EntityType="Self.tblCollection" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblCollection].[CollectionID] AS [CollectionID], 
+    [tblCollection].[CollectionDate] AS [CollectionDate], 
+    [tblCollection].[CollectionAmount] AS [CollectionAmount], 
+    [tblCollection].[CollectionCheckNumber] AS [CollectionCheckNumber], 
+    [tblCollection].[CollectionCashYesNo] AS [CollectionCashYesNo], 
+    [tblCollection].[CollectionForCustomerNumber] AS [CollectionForCustomerNumber], 
+    [tblCollection].[OrderConfirmFlag] AS [OrderConfirmFlag]
+    FROM [dbo].[tblCollection] AS [tblCollection]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tblCustPaymentType" EntityType="Self.tblCustPaymentType" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblCustPaymentType].[CustPaymentTypeID] AS [CustPaymentTypeID], 
+    [tblCustPaymentType].[CustPaymentTypeNumber] AS [CustPaymentTypeNumber], 
+    [tblCustPaymentType].[CustPaymentTypeDescription] AS [CustPaymentTypeDescription]
+    FROM [dbo].[tblCustPaymentType] AS [tblCustPaymentType]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tblMesssage" EntityType="Self.tblMesssage" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblMesssage].[MessageID] AS [MessageID], 
+    [tblMesssage].[MessageDescription] AS [MessageDescription], 
+    [tblMesssage].[MessageAssignRouteNumber] AS [MessageAssignRouteNumber], 
+    [tblMesssage].[MessageAllFlag] AS [MessageAllFlag], 
+    [tblMesssage].[MessageAssignUserID] AS [MessageAssignUserID], 
+    [tblMesssage].[MessageDateAndTime] AS [MessageDateAndTime], 
+    [tblMesssage].[MessageCreatedByUser] AS [MessageCreatedByUser]
+    FROM [dbo].[tblMesssage] AS [tblMesssage]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tblPriceGroup" EntityType="Self.tblPriceGroup" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblPriceGroup].[PriceGroupID] AS [PriceGroupID], 
+    [tblPriceGroup].[PriceGroupNumber] AS [PriceGroupNumber], 
+    [tblPriceGroup].[ItemNumber] AS [ItemNumber], 
+    [tblPriceGroup].[RouteNumber] AS [RouteNumber], 
+    [tblPriceGroup].[BeginDate] AS [BeginDate], 
+    [tblPriceGroup].[EndDate] AS [EndDate], 
+    [tblPriceGroup].[EffectivePrice] AS [EffectivePrice]
+    FROM [dbo].[tblPriceGroup] AS [tblPriceGroup]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tblUserLogin" EntityType="Self.tblUserLogin" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblUserLogin].[UserID] AS [UserID], 
+    [tblUserLogin].[Password] AS [Password], 
+    [tblUserLogin].[EmailID] AS [EmailID]
+    FROM [dbo].[tblUserLogin] AS [tblUserLogin]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="myTestDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblAnswer">
+          <Key>
+            <PropertyRef Name="AnswerID" />
+          </Key>
+          <Property Name="AnswerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuestionID" Type="Int32" />
+          <Property Name="CustomerID" Type="Int32" />
+          <Property Name="Answer" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="SurveyDate" Type="DateTime" Precision="0" />
+          <Property Name="ItemNumber" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tblCity">
+          <Key>
+            <PropertyRef Name="City_ID" />
+          </Key>
+          <Property Name="City_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="City_Abbr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="City_Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="State_ID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tblCustomer">
+          <Key>
+            <PropertyRef Name="CustID" />
+          </Key>
+          <Property Name="CustID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustNumber" Type="Int32" />
+          <Property Name="CustName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CustOfficeAddress1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CustOfficeAddress2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CustOfficeCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CustOfficeState" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="CustOfficeZip" Type="Int32" />
+          <Property Name="CustPhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CustFaxNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CustRouteNumber" Type="Int32" />
+          <Property Name="CustSalesRepNumber" Type="Int32" />
+          <Property Name="CustOrderEntryContactName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CustPromoGroup" Type="Int32" />
+          <Property Name="CustPriceGroup" Type="Int32" />
+          <Property Name="CustPaymentTermsCode" Type="Int32" />
+          <Property Name="CustPaymentType" Type="Int32" />
+          <Property Name="CustBillingAddress1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CustBillingAddress2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CustBillingCity" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CustBillingState" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="CustBillingZip" Type="Int32" />
+          <Property Name="CustRouteVisitWeekDay" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CustSequence" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tblCustPaymentTerm">
+          <Key>
+            <PropertyRef Name="CustPaymentTermID" />
+          </Key>
+          <Property Name="CustPaymentTermID" Type="Int32" Nullable="false" />
+          <Property Name="CustPaymentTermCode" Type="Int32" />
+          <Property Name="CustPaymentTermDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblCustRoute">
+          <Key>
+            <PropertyRef Name="CustRouteNumberID" />
+          </Key>
+          <Property Name="CustRouteNumberID" Type="Int32" Nullable="false" />
+          <Property Name="CustRouteNumber" Type="Int32" />
+          <Property Name="CustRouteNumberDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CustRouteUserAssignID" Type="Int32" />
+          <Property Name="CustRouteAssignFrom" Type="DateTime" Precision="3" />
+          <Property Name="CustRouteAssignTo" Type="DateTime" Precision="3" />
+          <Property Name="CustRouteRep" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblInvoiceHistory">
+          <Key>
+            <PropertyRef Name="InvoiceID" />
+          </Key>
+          <Property Name="InvoiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InvoiceNumber" Type="Int32" />
+          <Property Name="InvoiceDate" Type="DateTime" Precision="3" />
+          <Property Name="InvoiceStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="InvoiceForCustomerNumber" Type="Int32" />
+          <Property Name="InvoiceAmount" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="tblItem">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemNumber" Type="Int32" />
+          <Property Name="ItemShortDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ItemDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ItemUPC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ItemShelfLife" Type="Int32" />
+          <Property Name="ItemReturnAllowedFlag" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="ItemType" Type="Int32" />
+          <Property Name="ItemUnits" Type="Int32" />
+          <Property Name="ItemWeights" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ItemPriceGroup" Type="Int32" />
+          <Property Name="ItemProductGroup" Type="Int32" />
+          <Property Name="ItemPromoGroup" Type="Int32" />
+          <Property Name="PrePrice" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tblItemPromoGroup">
+          <Key>
+            <PropertyRef Name="ItemPromoGroupID" />
+          </Key>
+          <Property Name="ItemPromoGroupID" Type="Int32" Nullable="false" />
+          <Property Name="ItemPromoGroupNumber" Type="Int32" />
+          <Property Name="ItemPromoGroupDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblItemType">
+          <Key>
+            <PropertyRef Name="ItemTypeID" />
+          </Key>
+          <Property Name="ItemTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemTypeNumber" Type="Int32" />
+          <Property Name="ItemTypeDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblOrder">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderTrackingNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrderRouteNumber" Type="Int32" />
+          <Property Name="OrderCustomerNumber" Type="Int32" />
+          <Property Name="OrderGroupNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrderCaseNumbers" Type="Int32" />
+          <Property Name="OrderItemNumber" Type="Int32" />
+          <Property Name="OrderPromoNumber" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="OrderItemQty" Type="Int32" />
+          <Property Name="ItemUnitPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ItemTotalPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="OrderDate" Type="DateTime" Precision="3" />
+          <Property Name="DeliveryDate" Type="DateTime" Precision="3" />
+          <Property Name="UserID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TabletID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DataSyncDateTime" Type="DateTime" Precision="3" />
+          <Property Name="OrderConfirmFlag" Type="Int32" />
+          <Property Name="ItemType" Type="Int32" />
+          <Property Name="PerPoundItemsWeight" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="tblOrderHistory">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderCustomerNumber" Type="Int32" Nullable="false" />
+          <Property Name="OrderItemNumber" Type="Int32" />
+          <Property Name="OrderDate1" Type="DateTime" Precision="3" />
+          <Property Name="OrderItemQty1" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="OrderDate2" Type="DateTime" Precision="3" />
+          <Property Name="OrderItemQty2" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="OrderDate3" Type="DateTime" Precision="3" />
+          <Property Name="OrderItemQty3" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="OrderDate4" Type="DateTime" Precision="3" />
+          <Property Name="OrderItemQty4" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="OrderDate5" Type="DateTime" Precision="3" />
+          <Property Name="OrderItemQty5" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="OrderDate6" Type="DateTime" Precision="3" />
+          <Property Name="OrderItemQty6" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="tblProductGroup">
+          <Key>
+            <PropertyRef Name="ItemProductGroupID" />
+          </Key>
+          <Property Name="ItemProductGroupID" Type="Int32" Nullable="false" />
+          <Property Name="ItemProductGroupNumber" Type="Int32" />
+          <Property Name="ItemProductGroupDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblQuestionMaster">
+          <Key>
+            <PropertyRef Name="QuestionID" />
+          </Key>
+          <Property Name="QuestionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuestionDesc" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="QuestionTypeID" Type="Int32" />
+          <Property Name="QuesType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ValidationType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblQuestionType">
+          <Key>
+            <PropertyRef Name="QuestionTypeID" />
+          </Key>
+          <Property Name="QuestionTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuestionTypeDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblReturn">
+          <Key>
+            <PropertyRef Name="ReturnID" />
+          </Key>
+          <Property Name="ReturnID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReturnGroupNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ReturnCaseNumbers" Type="Int32" />
+          <Property Name="ReturnItemNumber" Type="Int32" />
+          <Property Name="ReturnPromoNumber" Type="Int32" />
+          <Property Name="ReturnItemWeight" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ReturnItemUnits" Type="Int32" />
+          <Property Name="ItemUnitPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CustomerNumber" Type="Int32" />
+          <Property Name="ItemTotalPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ReturnDate" Type="DateTime" Precision="3" />
+          <Property Name="UserID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TabletID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DataSyncDateTime" Type="DateTime" Precision="3" />
+          <Property Name="OrderConfirmFlag" Type="Int32" />
+          <Property Name="ItemType" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tblReturnType">
+          <Key>
+            <PropertyRef Name="ReturnTypeID" />
+          </Key>
+          <Property Name="ReturnTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReturnTypeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ReturnTypeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblState">
+          <Key>
+            <PropertyRef Name="State_ID" />
+          </Key>
+          <Property Name="State_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="State_Abbr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State_Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Country_ID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tblTropicalUser">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LoginID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RoleID" Type="Int32" />
+          <Property Name="UserRouteNumber" Type="Int32" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblTropicalUserRole">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RoleCreatedBy" Type="Int32" />
+          <Property Name="RoleCreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Active" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tblCollection">
+          <Key>
+            <PropertyRef Name="CollectionID" />
+          </Key>
+          <Property Name="CollectionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CollectionDate" Type="DateTime" Precision="3" />
+          <Property Name="CollectionAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CollectionCheckNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CollectionCashYesNo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="CollectionForCustomerNumber" Type="Int32" />
+          <Property Name="OrderConfirmFlag" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tblCustPaymentType">
+          <Key>
+            <PropertyRef Name="CustPaymentTypeID" />
+          </Key>
+          <Property Name="CustPaymentTypeID" Type="Int32" Nullable="false" />
+          <Property Name="CustPaymentTypeNumber" Type="Int32" />
+          <Property Name="CustPaymentTypeDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblMesssage">
+          <Key>
+            <PropertyRef Name="MessageID" />
+          </Key>
+          <Property Name="MessageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MessageDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MessageAssignRouteNumber" Type="Int32" />
+          <Property Name="MessageAllFlag" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="MessageAssignUserID" Type="Int32" />
+          <Property Name="MessageDateAndTime" Type="DateTime" Precision="3" />
+          <Property Name="MessageCreatedByUser" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tblPriceGroup">
+          <Key>
+            <PropertyRef Name="PriceGroupID" />
+          </Key>
+          <Property Name="PriceGroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PriceGroupNumber" Type="Int32" />
+          <Property Name="ItemNumber" Type="Int32" />
+          <Property Name="RouteNumber" Type="Int32" />
+          <Property Name="BeginDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="EffectivePrice" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="tblUserLogin">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="EmailID" />
+          </Key>
+          <Property Name="UserID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmailID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="myTestDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="tblAnswers" EntityType="Self.tblAnswer" />
+          <EntitySet Name="tblCities" EntityType="Self.tblCity" />
+          <EntitySet Name="tblCustomers" EntityType="Self.tblCustomer" />
+          <EntitySet Name="tblCustPaymentTerms" EntityType="Self.tblCustPaymentTerm" />
+          <EntitySet Name="tblCustRoutes" EntityType="Self.tblCustRoute" />
+          <EntitySet Name="tblInvoiceHistories" EntityType="Self.tblInvoiceHistory" />
+          <EntitySet Name="tblItems" EntityType="Self.tblItem" />
+          <EntitySet Name="tblItemPromoGroups" EntityType="Self.tblItemPromoGroup" />
+          <EntitySet Name="tblItemTypes" EntityType="Self.tblItemType" />
+          <EntitySet Name="tblOrders" EntityType="Self.tblOrder" />
+          <EntitySet Name="tblOrderHistories" EntityType="Self.tblOrderHistory" />
+          <EntitySet Name="tblProductGroups" EntityType="Self.tblProductGroup" />
+          <EntitySet Name="tblQuestionMasters" EntityType="Self.tblQuestionMaster" />
+          <EntitySet Name="tblQuestionTypes" EntityType="Self.tblQuestionType" />
+          <EntitySet Name="tblReturns" EntityType="Self.tblReturn" />
+          <EntitySet Name="tblReturnTypes" EntityType="Self.tblReturnType" />
+          <EntitySet Name="tblStates" EntityType="Self.tblState" />
+          <EntitySet Name="tblTropicalUsers" EntityType="Self.tblTropicalUser" />
+          <EntitySet Name="tblTropicalUserRoles" EntityType="Self.tblTropicalUserRole" />
+          <EntitySet Name="tblCollections" EntityType="Self.tblCollection" />
+          <EntitySet Name="tblCustPaymentTypes" EntityType="Self.tblCustPaymentType" />
+          <EntitySet Name="tblMesssages" EntityType="Self.tblMesssage" />
+          <EntitySet Name="tblPriceGroups" EntityType="Self.tblPriceGroup" />
+          <EntitySet Name="tblUserLogins" EntityType="Self.tblUserLogin" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="myTestDBModelStoreContainer" CdmEntityContainer="myTestDBEntities">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="myTestDBModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblAnswers">
+            <EntityTypeMapping TypeName="myTestDBModel.tblAnswer">
+              <MappingFragment StoreEntitySet="tblAnswers">
+                <ScalarProperty Name="AnswerID" ColumnName="AnswerID" />
+                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="SurveyDate" ColumnName="SurveyDate" />
+                <ScalarProperty Name="ItemNumber" ColumnName="ItemNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCities">
+            <EntityTypeMapping TypeName="myTestDBModel.tblCity">
+              <MappingFragment StoreEntitySet="tblCity">
+                <ScalarProperty Name="City_ID" ColumnName="City_ID" />
+                <ScalarProperty Name="City_Abbr" ColumnName="City_Abbr" />
+                <ScalarProperty Name="City_Description" ColumnName="City_Description" />
+                <ScalarProperty Name="State_ID" ColumnName="State_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCustomers">
+            <EntityTypeMapping TypeName="myTestDBModel.tblCustomer">
+              <MappingFragment StoreEntitySet="tblCustomer">
+                <ScalarProperty Name="CustID" ColumnName="CustID" />
+                <ScalarProperty Name="CustNumber" ColumnName="CustNumber" />
+                <ScalarProperty Name="CustName" ColumnName="CustName" />
+                <ScalarProperty Name="CustOfficeAddress1" ColumnName="CustOfficeAddress1" />
+                <ScalarProperty Name="CustOfficeAddress2" ColumnName="CustOfficeAddress2" />
+                <ScalarProperty Name="CustOfficeCity" ColumnName="CustOfficeCity" />
+                <ScalarProperty Name="CustOfficeState" ColumnName="CustOfficeState" />
+                <ScalarProperty Name="CustOfficeZip" ColumnName="CustOfficeZip" />
+                <ScalarProperty Name="CustPhoneNumber" ColumnName="CustPhoneNumber" />
+                <ScalarProperty Name="CustFaxNumber" ColumnName="CustFaxNumber" />
+                <ScalarProperty Name="CustRouteNumber" ColumnName="CustRouteNumber" />
+                <ScalarProperty Name="CustSalesRepNumber" ColumnName="CustSalesRepNumber" />
+                <ScalarProperty Name="CustOrderEntryContactName" ColumnName="CustOrderEntryContactName" />
+                <ScalarProperty Name="CustPromoGroup" ColumnName="CustPromoGroup" />
+                <ScalarProperty Name="CustPriceGroup" ColumnName="CustPriceGroup" />
+                <ScalarProperty Name="CustPaymentTermsCode" ColumnName="CustPaymentTermsCode" />
+                <ScalarProperty Name="CustPaymentType" ColumnName="CustPaymentType" />
+                <ScalarProperty Name="CustBillingAddress1" ColumnName="CustBillingAddress1" />
+                <ScalarProperty Name="CustBillingAddress2" ColumnName="CustBillingAddress2" />
+                <ScalarProperty Name="CustBillingCity" ColumnName="CustBillingCity" />
+                <ScalarProperty Name="CustBillingState" ColumnName="CustBillingState" />
+                <ScalarProperty Name="CustBillingZip" ColumnName="CustBillingZip" />
+                <ScalarProperty Name="CustRouteVisitWeekDay" ColumnName="CustRouteVisitWeekDay" />
+                <ScalarProperty Name="CustSequence" ColumnName="CustSequence" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCustPaymentTerms">
+            <EntityTypeMapping TypeName="myTestDBModel.tblCustPaymentTerm">
+              <MappingFragment StoreEntitySet="tblCustPaymentTerm">
+                <ScalarProperty Name="CustPaymentTermID" ColumnName="CustPaymentTermID" />
+                <ScalarProperty Name="CustPaymentTermCode" ColumnName="CustPaymentTermCode" />
+                <ScalarProperty Name="CustPaymentTermDescription" ColumnName="CustPaymentTermDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCustRoutes">
+            <EntityTypeMapping TypeName="myTestDBModel.tblCustRoute">
+              <MappingFragment StoreEntitySet="tblCustRoute">
+                <ScalarProperty Name="CustRouteNumberID" ColumnName="CustRouteNumberID" />
+                <ScalarProperty Name="CustRouteNumber" ColumnName="CustRouteNumber" />
+                <ScalarProperty Name="CustRouteNumberDescription" ColumnName="CustRouteNumberDescription" />
+                <ScalarProperty Name="CustRouteUserAssignID" ColumnName="CustRouteUserAssignID" />
+                <ScalarProperty Name="CustRouteAssignFrom" ColumnName="CustRouteAssignFrom" />
+                <ScalarProperty Name="CustRouteAssignTo" ColumnName="CustRouteAssignTo" />
+                <ScalarProperty Name="CustRouteRep" ColumnName="CustRouteRep" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblInvoiceHistories">
+            <EntityTypeMapping TypeName="myTestDBModel.tblInvoiceHistory">
+              <MappingFragment StoreEntitySet="tblInvoiceHistory">
+                <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+                <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+                <ScalarProperty Name="InvoiceStatus" ColumnName="InvoiceStatus" />
+                <ScalarProperty Name="InvoiceForCustomerNumber" ColumnName="InvoiceForCustomerNumber" />
+                <ScalarProperty Name="InvoiceAmount" ColumnName="InvoiceAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblItems">
+            <EntityTypeMapping TypeName="myTestDBModel.tblItem">
+              <MappingFragment StoreEntitySet="tblItem">
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="ItemNumber" ColumnName="ItemNumber" />
+                <ScalarProperty Name="ItemShortDescription" ColumnName="ItemShortDescription" />
+                <ScalarProperty Name="ItemDescription" ColumnName="ItemDescription" />
+                <ScalarProperty Name="ItemUPC" ColumnName="ItemUPC" />
+                <ScalarProperty Name="ItemShelfLife" ColumnName="ItemShelfLife" />
+                <ScalarProperty Name="ItemReturnAllowedFlag" ColumnName="ItemReturnAllowedFlag" />
+                <ScalarProperty Name="ItemType" ColumnName="ItemType" />
+                <ScalarProperty Name="ItemUnits" ColumnName="ItemUnits" />
+                <ScalarProperty Name="ItemWeights" ColumnName="ItemWeights" />
+                <ScalarProperty Name="ItemPriceGroup" ColumnName="ItemPriceGroup" />
+                <ScalarProperty Name="ItemProductGroup" ColumnName="ItemProductGroup" />
+                <ScalarProperty Name="ItemPromoGroup" ColumnName="ItemPromoGroup" />
+                <ScalarProperty Name="PrePrice" ColumnName="PrePrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblItemPromoGroups">
+            <EntityTypeMapping TypeName="myTestDBModel.tblItemPromoGroup">
+              <MappingFragment StoreEntitySet="tblItemPromoGroup">
+                <ScalarProperty Name="ItemPromoGroupID" ColumnName="ItemPromoGroupID" />
+                <ScalarProperty Name="ItemPromoGroupNumber" ColumnName="ItemPromoGroupNumber" />
+                <ScalarProperty Name="ItemPromoGroupDescription" ColumnName="ItemPromoGroupDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblItemTypes">
+            <EntityTypeMapping TypeName="myTestDBModel.tblItemType">
+              <MappingFragment StoreEntitySet="tblItemType">
+                <ScalarProperty Name="ItemTypeID" ColumnName="ItemTypeID" />
+                <ScalarProperty Name="ItemTypeNumber" ColumnName="ItemTypeNumber" />
+                <ScalarProperty Name="ItemTypeDescription" ColumnName="ItemTypeDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblOrders">
+            <EntityTypeMapping TypeName="myTestDBModel.tblOrder">
+              <MappingFragment StoreEntitySet="tblOrder">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="OrderTrackingNumber" ColumnName="OrderTrackingNumber" />
+                <ScalarProperty Name="OrderRouteNumber" ColumnName="OrderRouteNumber" />
+                <ScalarProperty Name="OrderCustomerNumber" ColumnName="OrderCustomerNumber" />
+                <ScalarProperty Name="OrderGroupNumber" ColumnName="OrderGroupNumber" />
+                <ScalarProperty Name="OrderCaseNumbers" ColumnName="OrderCaseNumbers" />
+                <ScalarProperty Name="OrderItemNumber" ColumnName="OrderItemNumber" />
+                <ScalarProperty Name="OrderPromoNumber" ColumnName="OrderPromoNumber" />
+                <ScalarProperty Name="OrderItemQty" ColumnName="OrderItemQty" />
+                <ScalarProperty Name="ItemUnitPrice" ColumnName="ItemUnitPrice" />
+                <ScalarProperty Name="ItemTotalPrice" ColumnName="ItemTotalPrice" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="TabletID" ColumnName="TabletID" />
+                <ScalarProperty Name="DataSyncDateTime" ColumnName="DataSyncDateTime" />
+                <ScalarProperty Name="OrderConfirmFlag" ColumnName="OrderConfirmFlag" />
+                <ScalarProperty Name="ItemType" ColumnName="ItemType" />
+                <ScalarProperty Name="PerPoundItemsWeight" ColumnName="PerPoundItemsWeight" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblOrderHistories">
+            <EntityTypeMapping TypeName="myTestDBModel.tblOrderHistory">
+              <MappingFragment StoreEntitySet="tblOrderHistory">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="OrderCustomerNumber" ColumnName="OrderCustomerNumber" />
+                <ScalarProperty Name="OrderItemNumber" ColumnName="OrderItemNumber" />
+                <ScalarProperty Name="OrderDate1" ColumnName="OrderDate1" />
+                <ScalarProperty Name="OrderItemQty1" ColumnName="OrderItemQty1" />
+                <ScalarProperty Name="OrderDate2" ColumnName="OrderDate2" />
+                <ScalarProperty Name="OrderItemQty2" ColumnName="OrderItemQty2" />
+                <ScalarProperty Name="OrderDate3" ColumnName="OrderDate3" />
+                <ScalarProperty Name="OrderItemQty3" ColumnName="OrderItemQty3" />
+                <ScalarProperty Name="OrderDate4" ColumnName="OrderDate4" />
+                <ScalarProperty Name="OrderItemQty4" ColumnName="OrderItemQty4" />
+                <ScalarProperty Name="OrderDate5" ColumnName="OrderDate5" />
+                <ScalarProperty Name="OrderItemQty5" ColumnName="OrderItemQty5" />
+                <ScalarProperty Name="OrderDate6" ColumnName="OrderDate6" />
+                <ScalarProperty Name="OrderItemQty6" ColumnName="OrderItemQty6" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblProductGroups">
+            <EntityTypeMapping TypeName="myTestDBModel.tblProductGroup">
+              <MappingFragment StoreEntitySet="tblProductGroup">
+                <ScalarProperty Name="ItemProductGroupID" ColumnName="ItemProductGroupID" />
+                <ScalarProperty Name="ItemProductGroupNumber" ColumnName="ItemProductGroupNumber" />
+                <ScalarProperty Name="ItemProductGroupDescription" ColumnName="ItemProductGroupDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblQuestionMasters">
+            <EntityTypeMapping TypeName="myTestDBModel.tblQuestionMaster">
+              <MappingFragment StoreEntitySet="tblQuestionMaster">
+                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+                <ScalarProperty Name="QuestionDesc" ColumnName="QuestionDesc" />
+                <ScalarProperty Name="QuestionTypeID" ColumnName="QuestionTypeID" />
+                <ScalarProperty Name="QuesType" ColumnName="QuesType" />
+                <ScalarProperty Name="ValidationType" ColumnName="ValidationType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblQuestionTypes">
+            <EntityTypeMapping TypeName="myTestDBModel.tblQuestionType">
+              <MappingFragment StoreEntitySet="tblQuestionType">
+                <ScalarProperty Name="QuestionTypeID" ColumnName="QuestionTypeID" />
+                <ScalarProperty Name="QuestionTypeDesc" ColumnName="QuestionTypeDesc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblReturns">
+            <EntityTypeMapping TypeName="myTestDBModel.tblReturn">
+              <MappingFragment StoreEntitySet="tblReturn">
+                <ScalarProperty Name="ReturnID" ColumnName="ReturnID" />
+                <ScalarProperty Name="ReturnGroupNumber" ColumnName="ReturnGroupNumber" />
+                <ScalarProperty Name="ReturnCaseNumbers" ColumnName="ReturnCaseNumbers" />
+                <ScalarProperty Name="ReturnItemNumber" ColumnName="ReturnItemNumber" />
+                <ScalarProperty Name="ReturnPromoNumber" ColumnName="ReturnPromoNumber" />
+                <ScalarProperty Name="ReturnItemWeight" ColumnName="ReturnItemWeight" />
+                <ScalarProperty Name="ReturnItemUnits" ColumnName="ReturnItemUnits" />
+                <ScalarProperty Name="ItemUnitPrice" ColumnName="ItemUnitPrice" />
+                <ScalarProperty Name="CustomerNumber" ColumnName="CustomerNumber" />
+                <ScalarProperty Name="ItemTotalPrice" ColumnName="ItemTotalPrice" />
+                <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="TabletID" ColumnName="TabletID" />
+                <ScalarProperty Name="DataSyncDateTime" ColumnName="DataSyncDateTime" />
+                <ScalarProperty Name="OrderConfirmFlag" ColumnName="OrderConfirmFlag" />
+                <ScalarProperty Name="ItemType" ColumnName="ItemType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblReturnTypes">
+            <EntityTypeMapping TypeName="myTestDBModel.tblReturnType">
+              <MappingFragment StoreEntitySet="tblReturnTypes">
+                <ScalarProperty Name="ReturnTypeID" ColumnName="ReturnTypeID" />
+                <ScalarProperty Name="ReturnTypeCode" ColumnName="ReturnTypeCode" />
+                <ScalarProperty Name="ReturnTypeDescription" ColumnName="ReturnTypeDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblStates">
+            <EntityTypeMapping TypeName="myTestDBModel.tblState">
+              <MappingFragment StoreEntitySet="tblState">
+                <ScalarProperty Name="State_ID" ColumnName="State_ID" />
+                <ScalarProperty Name="State_Abbr" ColumnName="State_Abbr" />
+                <ScalarProperty Name="State_Description" ColumnName="State_Description" />
+                <ScalarProperty Name="Country_ID" ColumnName="Country_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTropicalUsers">
+            <EntityTypeMapping TypeName="myTestDBModel.tblTropicalUser">
+              <MappingFragment StoreEntitySet="tblTropicalUser">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="LoginID" ColumnName="LoginID" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="UserRouteNumber" ColumnName="UserRouteNumber" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTropicalUserRoles">
+            <EntityTypeMapping TypeName="myTestDBModel.tblTropicalUserRole">
+              <MappingFragment StoreEntitySet="tblTropicalUserRole">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleDescription" ColumnName="RoleDescription" />
+                <ScalarProperty Name="RoleCreatedBy" ColumnName="RoleCreatedBy" />
+                <ScalarProperty Name="RoleCreatedDate" ColumnName="RoleCreatedDate" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCollections">
+            <EntityTypeMapping TypeName="myTestDBModel.tblCollection">
+              <MappingFragment StoreEntitySet="tblCollection">
+                <ScalarProperty Name="CollectionID" ColumnName="CollectionID" />
+                <ScalarProperty Name="CollectionDate" ColumnName="CollectionDate" />
+                <ScalarProperty Name="CollectionAmount" ColumnName="CollectionAmount" />
+                <ScalarProperty Name="CollectionCheckNumber" ColumnName="CollectionCheckNumber" />
+                <ScalarProperty Name="CollectionCashYesNo" ColumnName="CollectionCashYesNo" />
+                <ScalarProperty Name="CollectionForCustomerNumber" ColumnName="CollectionForCustomerNumber" />
+                <ScalarProperty Name="OrderConfirmFlag" ColumnName="OrderConfirmFlag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCustPaymentTypes">
+            <EntityTypeMapping TypeName="myTestDBModel.tblCustPaymentType">
+              <MappingFragment StoreEntitySet="tblCustPaymentType">
+                <ScalarProperty Name="CustPaymentTypeID" ColumnName="CustPaymentTypeID" />
+                <ScalarProperty Name="CustPaymentTypeNumber" ColumnName="CustPaymentTypeNumber" />
+                <ScalarProperty Name="CustPaymentTypeDescription" ColumnName="CustPaymentTypeDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblMesssages">
+            <EntityTypeMapping TypeName="myTestDBModel.tblMesssage">
+              <MappingFragment StoreEntitySet="tblMesssage">
+                <ScalarProperty Name="MessageID" ColumnName="MessageID" />
+                <ScalarProperty Name="MessageDescription" ColumnName="MessageDescription" />
+                <ScalarProperty Name="MessageAssignRouteNumber" ColumnName="MessageAssignRouteNumber" />
+                <ScalarProperty Name="MessageAllFlag" ColumnName="MessageAllFlag" />
+                <ScalarProperty Name="MessageAssignUserID" ColumnName="MessageAssignUserID" />
+                <ScalarProperty Name="MessageDateAndTime" ColumnName="MessageDateAndTime" />
+                <ScalarProperty Name="MessageCreatedByUser" ColumnName="MessageCreatedByUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPriceGroups">
+            <EntityTypeMapping TypeName="myTestDBModel.tblPriceGroup">
+              <MappingFragment StoreEntitySet="tblPriceGroup">
+                <ScalarProperty Name="PriceGroupID" ColumnName="PriceGroupID" />
+                <ScalarProperty Name="PriceGroupNumber" ColumnName="PriceGroupNumber" />
+                <ScalarProperty Name="ItemNumber" ColumnName="ItemNumber" />
+                <ScalarProperty Name="RouteNumber" ColumnName="RouteNumber" />
+                <ScalarProperty Name="BeginDate" ColumnName="BeginDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="EffectivePrice" ColumnName="EffectivePrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUserLogins">
+            <EntityTypeMapping TypeName="myTestDBModel.tblUserLogin">
+              <MappingFragment StoreEntitySet="tblUserLogin">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
